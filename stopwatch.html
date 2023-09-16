@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Dan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+        .timer{font-size: 35px;}
+    </style>
+    <title>Tick tock tick tock..</title>
+</head>
+<body>
+    
+    <div class="container-md">
+        <div class=" p-5 mt-5 mb-4 bg-body-secondary rounded-3 text-center">
+
+            <div class="timer"><span class="minutes">00</span>:<span class="seconds">00</span>
+            </div>
+            <div class="timer-buttons">
+
+                <button type="button" data-action="start" class="btn btn-outline-success btn-lg">Start</button>
+                <button type="button" data-action="stop" class="btn btn-outline-danger btn-lg">Stop</button>
+               
+
+            </div>
+ <button type="button"  data-action="reset" class="btn btn-link">reset</button>
+        </div>
+    
+    
+    
+    </div>
+<script>
+const startb=document.querySelector('[data-action=  "start"]')
+const stopb=document.querySelector('[data-action="stop"]')
+const resetb=document.querySelector('[data-action=  "reset"]')
+const minutes=document.querySelector('.minutes')
+const seconds=document.querySelector('.seconds')
+let timer=00
+let isRunning=false
+let interval
+
+
+
+
+startb.addEventListener('click',startClock)
+stopb.addEventListener('click',stopClock)
+resetb.addEventListener('click',resetClock)
+
+function startClock(){
+    if(isRunning) return
+    isRunning=true
+    interval=setInterval(incrementTIme,1000)
+}
+function stopClock(){
+    if(!isRunning)return
+    isRunning=false
+    clearInterval(interval)
+}
+function resetClock(){
+    stopClock()
+    timer=0
+     minutes.innerHTML='00'
+     seconds.innerHTML='00'
+}
+
+function incrementTIme(){
+
+    timer++
+    const numofmin=Math.floor(timer/60)
+    const numofsec=timer %60
+    minutes.innerHTML=pad(numofmin)
+    seconds.innerHTML=pad(numofsec)
+
+}
+
+function pad(n){
+    if(n<10){return '0'+n}
+    else{ return n}
+}
+
+</script>
+</body>
+</html>
